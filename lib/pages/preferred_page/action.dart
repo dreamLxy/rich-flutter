@@ -1,10 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum PreferredAction { action }
+enum PreferredAction { changeTabsAction }
 
 class PreferredActionCreator {
-  static Action onAction() {
-    return const Action(PreferredAction.action);
+  static Action changeTabsAction(payload) {
+    return Action(PreferredAction.changeTabsAction, payload: payload);
   }
 }

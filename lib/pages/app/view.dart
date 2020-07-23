@@ -46,7 +46,7 @@ Widget buildView(AppState state, Dispatch dispatch, ViewService viewService) {
   return Scaffold(
     body: IndexedStack(
       children: List.generate(
-          tabBar.length,
+          tabBar?.length,
           (index) =>
               tabBar[index]['buildTabBarView']({'setTabIndex': switchTab})),
       index: state.currentTabIndex,
@@ -54,7 +54,7 @@ Widget buildView(AppState state, Dispatch dispatch, ViewService viewService) {
     bottomNavigationBar: BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: List.generate(
-          tabBar.length,
+          tabBar?.length,
           (index) => BottomNavigationBarItem(
               icon: tabBar[index]['icon'], title: tabBar[index]['title'])),
       currentIndex: state.currentTabIndex,
