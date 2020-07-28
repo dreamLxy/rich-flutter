@@ -26,3 +26,8 @@ fetchPreferred(data) async {
 fetchMAList(data) async {
   return await request.postAsync('$prefixUrl/recomand/maList', data: data);
 }
+
+/// 模糊搜索
+search(data) async {
+  return await request.postAsync('$prefixUrl/search', data: data);
+}

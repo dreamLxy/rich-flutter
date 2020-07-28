@@ -5,22 +5,17 @@ import 'package:flutter/widgets.dart';
 
 import 'package:rich/pages/splash_page/page.dart';
 import 'package:rich/pages/app/page.dart';
-//import 'package:rich/pages/mine_page/page.dart';
-//import 'package:rich/pages/preferred_page/page.dart';
-//import 'package:rich/pages/attention_page/page.dart';
-//import 'package:rich/pages/community_page/page.dart';
+import 'package:rich/pages/search_page/page.dart';
 
 class Router {
   static const app = 'app://'; // app主页
   static const splashPage = 'app://splashPage'; // 闪屏页
-//  static const minePage = 'app://minePage'; // 个人中心
-//  static const preferredPage = 'app://preferredPage'; // 精选股（首页）
-//  static const attentionPage = 'app://attentionPage'; // 自选股
-//  static const communityPage = 'app://communityPage'; // 社区
+  static const searchPage = 'app://searchPage'; // 搜索页
 
   static final fishRedux.AbstractRoutes routes = fishRedux.PageRoutes(pages: {
     Router.app: AppPage(),
     Router.splashPage: SplashPage(),
+    Router.searchPage: SearchPage(),
   });
 
   Router.pushNoParams(BuildContext context, String routeName,

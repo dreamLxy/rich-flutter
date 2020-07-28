@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:rich/utils/constant.dart';
+import 'package:rich/utils/cupertinoLocalizationsDelegate.dart';
 //import 'package:fluwx/fluwx.dart';
 
 import './utils/event.dart';
@@ -21,6 +22,7 @@ Widget myApp() {
   return OKToast(
     child: MaterialApp(
       localizationsDelegates: [
+        CupertinoLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
@@ -28,9 +30,10 @@ Widget myApp() {
         const Locale('zh', 'CH'),
         const Locale('en', 'US'),
       ],
-      locale: Locale('zh'),
+      locale: const Locale('zh'),
       theme: ThemeData(
         primaryColor: up,
+        cursorColor: up,
       ),
       home: Router.routes.buildPage(Router.splashPage, null),
       onGenerateRoute: (settings) {
