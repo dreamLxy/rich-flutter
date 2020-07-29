@@ -31,3 +31,8 @@ fetchMAList(data) async {
 search(data) async {
   return await request.postAsync('$prefixUrl/search', data: data);
 }
+
+/// 社区 - 文章列表
+fetchArticles(data) async {
+  return await request.postAsync('$prefixUrl/discover/list', data: data);
+}

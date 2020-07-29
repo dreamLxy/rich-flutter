@@ -4,17 +4,17 @@ import 'package:rich/utils/constant.dart';
 class TopTabBar extends StatefulWidget {
   final List tabList;
   final TabController controller;
-  Function onTab;
+  final Function onTab;
 
   TopTabBar(
       {Key key, @required this.tabList, @required this.controller, this.onTab})
       : super(key: key);
 
   @override
-  TopTabBarState createState() => TopTabBarState();
+  _TopTabBarState createState() => _TopTabBarState();
 }
 
-class TopTabBarState extends State<TopTabBar> {
+class _TopTabBarState extends State<TopTabBar> {
   @override
   Widget build(BuildContext context) {
     return TabBar(

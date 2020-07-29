@@ -49,11 +49,18 @@ Widget buildView(NewsState state, Dispatch dispatch, ViewService viewService) {
     ),
     body: Container(
       padding: const EdgeInsets.only(left: 12, right: 12),
-      child: RefreshIndicator(
-        onRefresh: _onRefresh,
-        child: Column(
-          children: List.generate(listView.length, (index) => listView[index]),
-        ),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: _onRefresh,
+              child: Column(
+                children:
+                    List.generate(listView.length, (index) => listView[index]),
+              ),
+            ),
+          )
+        ],
       ),
     ),
   );

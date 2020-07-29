@@ -8,10 +8,10 @@ class StockStatcTime extends StatefulWidget {
   StockStatcTime({Key key, @required this.date, @required this.onDateSelect}) : super(key: key);
 
   @override
-  StockStatcTimeState createState() => StockStatcTimeState();
+  _StockStatcTimeState createState() => _StockStatcTimeState();
 }
 
-class StockStatcTimeState extends State<StockStatcTime> {
+class _StockStatcTimeState extends State<StockStatcTime> {
 
   /// 选择时间
   Future _onDateTap() async {

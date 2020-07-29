@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:rich/utils/constant.dart';
 
 class StockList extends StatefulWidget {
-  List column = [];
-  List dataSource = [];
-  Function onRefresh;
+  final List column;
+  final List dataSource;
+  final Function onRefresh;
 
   StockList({
     Key key,
@@ -19,10 +19,10 @@ class StockList extends StatefulWidget {
         super(key: key);
 
   @override
-  StockListState createState() => StockListState();
+  _StockListState createState() => _StockListState();
 }
 
-class StockListState extends State<StockList> {
+class _StockListState extends State<StockList> {
   Widget buildDoubleLayer(dynamic top, dynamic bottom,
       {width, topColor, bottomColor}) {
     return Container(

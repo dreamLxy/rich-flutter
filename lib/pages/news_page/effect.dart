@@ -16,12 +16,11 @@ Future _initState(Action action, Context<NewsState> ctx) async {
 
   final newsListController = ctx.state.newsListController;
   newsListController.addListener(() async {
-    if (ctx.state.isAddMore) {
-      return;
-    }
-    if (newsListController.position.pixels >=
-        newsListController.position.maxScrollExtent - 150) {
-      await ctx.dispatch(NewsActionCreator.modifyIsAddMore({'isAddMore': true}));
+    if ((newsListController.position.pixels >=
+            newsListController.position.maxScrollExtent - 150) &&
+        ctx.state.isAddMore == false) {
+      await ctx
+          .dispatch(NewsActionCreator.modifyIsAddMore({'isAddMore': true}));
       await ctx.dispatch(NewsActionCreator.onFetchNews({
         'since': ctx.state.since,
         'end': ctx.state.end,
@@ -45,5 +44,7 @@ Future _onFetchNews(Action action, Context<NewsState> ctx) async {
     }
   } catch (e) {
     print(e);
+  } finally {
+    await ctx.dispatch(NewsActionCreator.modifyIsAddMore({'isAddMore': false}));
   }
 }

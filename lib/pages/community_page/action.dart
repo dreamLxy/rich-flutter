@@ -1,10 +1,15 @@
 import 'package:fish_redux/fish_redux.dart';
 
-//TODO replace with your own action
-enum CommunityAction { action }
+enum CommunityAction { onFetchArticles, saveArticles, modifyIsAddMore }
 
 class CommunityActionCreator {
-  static Action onAction() {
-    return const Action(CommunityAction.action);
+  static Action onFetchArticles(payload) {
+    return Action(CommunityAction.onFetchArticles, payload: payload);
+  }
+  static Action saveArticles(payload) {
+    return Action(CommunityAction.saveArticles, payload: payload);
+  }
+  static Action modifyIsAddMore(payload) {
+    return Action(CommunityAction.modifyIsAddMore, payload: payload);
   }
 }

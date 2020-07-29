@@ -22,7 +22,6 @@ NewsState _saveNews(NewsState state, Action action) {
   newState
     ..news = action.payload['news']
     ..since = action.payload['since']
-    ..end = action.payload['end']
-    ..isAddMore = false;
+    ..end = action.payload['end'];
   return newState;
 }

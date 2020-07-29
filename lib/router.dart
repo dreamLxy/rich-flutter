@@ -6,16 +6,19 @@ import 'package:flutter/widgets.dart';
 import 'package:rich/pages/splash_page/page.dart';
 import 'package:rich/pages/app/page.dart';
 import 'package:rich/pages/search_page/page.dart';
+import 'package:rich/pages/image_page/page.dart';
 
 class Router {
   static const app = 'app://'; // app主页
   static const splashPage = 'app://splashPage'; // 闪屏页
   static const searchPage = 'app://searchPage'; // 搜索页
+  static const imageViewPage = 'app://imageViewPage'; // 图片查看页
 
   static final fishRedux.AbstractRoutes routes = fishRedux.PageRoutes(pages: {
     Router.app: AppPage(),
     Router.splashPage: SplashPage(),
     Router.searchPage: SearchPage(),
+    Router.imageViewPage: ImageViewPage()
   });
 
   Router.pushNoParams(BuildContext context, String routeName,
