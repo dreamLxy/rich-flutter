@@ -54,17 +54,7 @@ void _onFetchArticles(Action action, Context<CommunityState> ctx) async {
 
 void _onArticleApprove(Action action, Context<CommunityState> ctx) async {
   try {
-    var res = await articleApprove(action.payload);
-    print(res);
-    ctx.dispatch(
-      CommunityActionCreator.modifyArticleApproved(
-        {
-          'approved': 1,
-          'id': action.payload['id'],
-          'index': action.payload['index']
-        },
-      ),
-    );
+    await articleApprove(action.payload);
   } catch (e) {
     eventBus
         .fire(ShowToastEvent(ShowToastEvent.serverError + ': ${e.toString()}'));

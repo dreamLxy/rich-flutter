@@ -12,64 +12,12 @@ import 'state.dart';
 
 Widget buildView(
     CommunityState state, Dispatch dispatch, ViewService viewService) {
-  Widget buildAction(String text, IconData icon, Color color,
-      {Function onTap}) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.only(right: 24),
-        child: Row(
-          children: <Widget>[
-            LikeButton(
-                size: 16,
-                circleColor: CircleColor(
-                    start: color, end: Colors.red),
-                bubblesColor: BubblesColor(
-                  dotPrimaryColor: Color(0xff33b5e5),
-                  dotSecondaryColor: Color(0xff0099cc),
-                ),
-                likeBuilder: (bool isLiked) {
-                  return Icon(
-                    Icons.home,
-                    color: isLiked ? up : Colors.grey,
-                    size: 16,
-                  );
-                },
-                likeCount: 665,
-                countBuilder: (int count, bool isLiked, String text) {
-                  var color = isLiked ? Colors.deepPurpleAccent : Colors.grey;
-                  Widget result;
-                  if (count == 0) {
-                    result = Text(
-                      "love",
-                      style: TextStyle(color: up),
-                    );
-                  } else
-                    result = Text(
-                      text,
-                      style: TextStyle(color: color),
-                    );
-                  return result;
-                }),
-//            Icon(icon, color: color, size: 16),
-//            Padding(
-//              padding: const EdgeInsets.only(left: 6),
-//              child: Text(
-//                text,
-//                style: TextStyle(color: color, fontSize: 15),
-//              ),
-//            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  void onApprove(bool isApproved, int code, int index) {
-    print(isApproved);
-    print(code);
-    dispatch(CommunityActionCreator.onArticleApprove(
-        {'code': code, 'index': index}));
+  Future<bool> onLikeTap(bool isLiked, int code, int index) async {
+    if (!isLiked) {
+      dispatch(CommunityActionCreator.onArticleApprove(
+          {'code': code, 'index': index}));
+    }
+    return !isLiked;
   }
 
   return Scaffold(
@@ -85,7 +33,8 @@ Widget buildView(
               onRefresh: () => dispatch(
                 CommunityActionCreator.onFetchArticles(
                   {'currentPage': 1, 'pageSize': state.pageSize},
-                ),),
+                ),
+              ),
               child: ListView.builder(
                 controller: state.articlesController,
                 itemBuilder: (context, index) {
@@ -125,18 +74,53 @@ Widget buildView(
                           margin: const EdgeInsets.only(top: 6),
                           child: Row(
                             children: <Widget>[
-                              buildAction(
-                                '${item['commentCount'] ?? '0'}',
-                                Icons.chat,
-                                Colors.grey[600],
+                              Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.chat,
+                                      size: 16,
+                                      color: Colors.grey,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 4),
+                                      child: Text(
+                                        '${item['commentCount'] ?? 0}',
+                                        style: TextStyle(color: Colors.grey),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                margin: const EdgeInsets.only(right: 24),
                               ),
-                              buildAction(
-                                '${item['approve'] ?? '0'}',
-                                Icons.thumb_up,
-                                isApproved ? up : Colors.grey[600],
-                                onTap: () =>
-                                    onApprove(isApproved, item['id'], index),
-                              ),
+                              LikeButton(
+                                isLiked: isApproved,
+                                onTap: (bool isLiked) =>
+                                    onLikeTap(isLiked, item['id'], index),
+                                size: 16,
+                                circleColor:
+                                CircleColor(start: Colors.grey, end: up),
+                                bubblesColor: BubblesColor(
+                                  dotPrimaryColor: up,
+                                  dotSecondaryColor: up,
+                                ),
+                                likeBuilder: (bool isLiked) {
+                                  return Icon(
+                                    Icons.thumb_up,
+                                    color: isLiked ? up : Colors.grey,
+                                    size: 16,
+                                  );
+                                },
+                                likeCount: item['approve'],
+                                countBuilder:
+                                    (int count, bool isLiked, String text) {
+                                  var color = isLiked ? up : Colors.grey;
+                                  return Text(
+                                    text,
+                                    style: TextStyle(color: color),
+                                  );
+                                },
+                              )
                             ],
                           ),
                         ),
