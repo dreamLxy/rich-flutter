@@ -36,3 +36,8 @@ search(data) async {
 fetchArticles(data) async {
   return await request.postAsync('$prefixUrl/discover/list', data: data);
 }
+
+/// 社区 - 文章点赞
+articleApprove(data) async {
+  return await request.postAsync('$prefixUrl/discover/approve', data: data);
+}

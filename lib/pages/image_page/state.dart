@@ -10,9 +10,9 @@ class ImageViewState implements Cloneable<ImageViewState> {
   @override
   ImageViewState clone() {
     return ImageViewState()
-..images = images
-..currentIndex = currentIndex;
-}
+      ..images = images
+      ..currentIndex = currentIndex;
+  }
 }
 
 ImageViewState initState(Map<String, dynamic> args) {

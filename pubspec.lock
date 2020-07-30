@@ -154,6 +154,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.16.1"
+  like_button:
+    dependency: "direct dev"
+    description:
+      name: like_button
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   matcher:
     dependency: transitive
     description:

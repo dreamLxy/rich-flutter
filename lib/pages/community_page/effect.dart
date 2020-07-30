@@ -8,6 +8,7 @@ Effect<CommunityState> buildEffect() {
   return combineEffects(<Object, Effect<CommunityState>>{
     Lifecycle.initState: _initState,
     CommunityAction.onFetchArticles: _onFetchArticles,
+    CommunityAction.onArticleApprove: _onArticleApprove,
   });
 }
 
@@ -48,5 +49,24 @@ void _onFetchArticles(Action action, Context<CommunityState> ctx) async {
   } finally {
     await ctx
         .dispatch(CommunityActionCreator.modifyIsAddMore({'isAddMore': false}));
+  }
+}
+
+void _onArticleApprove(Action action, Context<CommunityState> ctx) async {
+  try {
+    var res = await articleApprove(action.payload);
+    print(res);
+    ctx.dispatch(
+      CommunityActionCreator.modifyArticleApproved(
+        {
+          'approved': 1,
+          'id': action.payload['id'],
+          'index': action.payload['index']
+        },
+      ),
+    );
+  } catch (e) {
+    eventBus
+        .fire(ShowToastEvent(ShowToastEvent.serverError + ': ${e.toString()}'));
   }
 }

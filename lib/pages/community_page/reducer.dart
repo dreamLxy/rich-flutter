@@ -8,6 +8,7 @@ Reducer<CommunityState> buildReducer() {
     <Object, Reducer<CommunityState>>{
       CommunityAction.saveArticles: _saveArticles,
       CommunityAction.modifyIsAddMore: _modifyIsAddMore,
+      CommunityAction.modifyArticleApproved: _modifyArticleApproved,
     },
   );
 }
@@ -31,4 +32,13 @@ CommunityState _saveArticles(CommunityState state, Action action) {
 CommunityState _modifyIsAddMore(CommunityState state, Action action) {
   final CommunityState newState = state.clone();
   return newState..isAddMore = action.payload['isAddMore'];
+}
+
+CommunityState _modifyArticleApproved(CommunityState state, Action action) {
+  final CommunityState newState = state.clone();
+  var currentArticle = newState.data[action.payload['index']];
+  currentArticle['approved'] =
+  action.payload['approved'];
+  currentArticle['approve'] = currentArticle['approve'] + 1;
+  return newState;
 }
