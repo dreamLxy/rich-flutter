@@ -102,7 +102,7 @@ Widget buildView(
                                 CircleColor(start: Colors.grey, end: up),
                                 bubblesColor: BubblesColor(
                                   dotPrimaryColor: up,
-                                  dotSecondaryColor: up,
+                                  dotSecondaryColor: Colors.deepOrange,
                                 ),
                                 likeBuilder: (bool isLiked) {
                                   return Icon(
